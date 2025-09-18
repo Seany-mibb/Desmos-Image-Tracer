@@ -71,7 +71,7 @@ There are really just two main files:
   - Cleaning up old files so the server doesn’t fill up.  
 
 - **`templates/index.html`**  
-  This is the simple web page where you upload your image and pick settings. It’s not fancy, but it gets the job done.  
+  This is the simple web page where you upload your image and pick settings.
 
 The program also creates temporary files like `.pbm` and `.svg` in the `output/` folder. These are just steps in the process.
 
@@ -80,9 +80,6 @@ The program also creates temporary files like `.pbm` and `.svg` in the `output/`
 ## Design Choices
 
 A few important choices were made:
-
-- **HTML Output vs JSON**  
-  At first, exporting everything into JSON was an idea, but the files became too large and hard to use. Instead, the app builds an HTML file that shows the results immediately in Desmos.
 
 - **Quality Levels**  
   Users can pick from “Super Low” to “Super High.” Low settings are fast but less detailed. High settings have way more curves (20k–35k+ equations), which look better but take longer to render.
@@ -100,7 +97,7 @@ A few important choices were made:
 The biggest limitation isn’t the code — it’s Desmos itself.
 
 Desmos gets very slow when you load thousands of parametric equations. At higher quality settings, the page may sometimes become unresponsive, and your browser may pop up a message asking whether to “Wait” or “Kill the page.”
-<img width="440" height="240" alt="Screenshot 2025-09-18 at 4 30 32 PM" src="https://github.com/user-attachments/assets/247a5a33-6132-4475-b795-b874ac47d7b8" />
+<img width="293" height="160" alt="Screenshot 2025-09-18 at 4 30 32 PM" src="https://github.com/user-attachments/assets/247a5a33-6132-4475-b795-b874ac47d7b8" />
 
 Medium & High settings may occasionally trigger a single “page unresponsive” warning, and you just need to click Wait.
 
