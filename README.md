@@ -138,4 +138,4 @@ Some ideas for making this better:
 
 Desmos Image Tracer is a simple but creative project. It takes one uploaded picture and transforms it into math art drawn by Desmos. Even though the rendering speed is limited by Desmos, the project shows how you can combine tools like OpenCV, Potrace, and a little math to create something unique.  
 
-It’s mainly built around two files (`app.py` and `index.html`), but together they handle the full process from upload to final graph. The project may be small, but it’s a good example of turning code into something visual and fun.
+It’s mainly built around two files (`app.py` and `index.html`), but together they handle the full process from upload to final graph.
