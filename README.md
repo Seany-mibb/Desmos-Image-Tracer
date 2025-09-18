@@ -29,6 +29,7 @@ Here’s the step-by-step process:
    The SVG file contains paths with coordinates. These paths are read and broken down into commands like lines and curves.
 
 5. **Turn into Equations**
+   
    Each SVG path is converted into parametric equations, which are equations that describe both the x and y coordinates as functions of a   parameter t (usually between 0 and 1). This is what allows Desmos to draw the paths smoothly.
 
    Lines:
