@@ -23,6 +23,20 @@ This lets you turn any image into math-based art without touching the Desmos edi
 
 ---
 
+---
+
+## ⚠️ Limitations
+The main bottleneck in this project is **Desmos itself**.  
+
+While the app can generate tens of thousands of equations from an image, the Desmos Graphing Calculator becomes **slow when rendering too many parametric curves at once**.  
+
+- Higher quality settings (`High` or `Super High`) can produce extremely detailed outputs, but you’ll notice:
+  - Slower loading times
+  - Lag when panning/zooming
+  - Gradual rendering instead of instant display
+
+This isn’t a limitation of the conversion process — it’s simply because Desmos isn’t optimized for such large datasets.  
+
 ## 🛠️ Installation
 Clone the repo and install dependencies:
 
