@@ -29,28 +29,28 @@ Here’s the step-by-step process:
    The SVG file contains paths with coordinates. These paths are read and broken down into commands like lines and curves.
 
 5. **Turn into Equations**
-   Each SVG path is converted into parametric equations, which are equations that describe both the x and y coordinates as functions of a   parameter t (usually between 0 and 1). This is what allows Desmos to draw the paths smoothly.
+Each SVG path is converted into parametric equations, which are equations that describe both the x and y coordinates as functions of a   parameter t (usually between 0 and 1). This is what allows Desmos to draw the paths smoothly.
 
    Lines:
    A straight line from (x0, y0) to (x1, y1) is written as:
 
-   x(t) = (1 - t) * x0 + t * x1
-   y(t) = (1 - t) * y0 + t * y1
+   `x(t) = (1 - t) * x0 + t * x1`
+   `y(t) = (1 - t) * y0 + t * y1`
 
    
-   As t goes from 0 to 1, the point (x(t), y(t)) moves smoothly along the line. This is called linear interpolation.
+   As t goes from 0 to 1, the point `(x(t), y(t))` moves smoothly from the starting coordinate to the ending coordinate, following the actual coordinate values of the image. This is still called `linear interpolation`, but the range of x and y depends on the original SVG or image dimensions.
    
    Curves (Cubic Bézier):
    Curves are more complex. A cubic Bézier curve is defined by four points: the starting point (x0, y0), two control points (x1, y1) and (x2, y2), and the ending point (x3, y3). The parametric equations are:
    
-   x(t) = (1-t)^3*x0 + 3*(1-t)^2*t*x1 + 3*(1-t)*t^2*x2 + t^3*x3
-   y(t) = (1-t)^3*y0 + 3*(1-t)^2*t*y1 + 3*(1-t)*t^2*y2 + t^3*y3
+   `x(t) = (1-t)^3*x0 + 3*(1-t)^2*t*x1 + 3*(1-t)*t^2*x2 + t^3*x3`
+   `y(t) = (1-t)^3*y0 + 3*(1-t)^2*t*y1 + 3*(1-t)*t^2*y2 + t^3*y3`
    
    
    These equations smoothly blend the influence of all four points as t moves from 0 to 1, creating the curve shape. This is the same math used in graphic design and animation to make smooth vector curves.
    
    Why Parametric Equations:
-   Parametric equations are ideal because Desmos can handle them directly. Instead of drawing pixel by pixel, Desmos uses the math to draw a continuous line, which keeps the image sharp and scalable.
+   Parametric equations are ideal for this project because they let us describe both x and y positions independently as functions of a single parameter t. This is perfect for tracing SVG paths, which can include lines, loops, and curves that aren’t simple functions of x or y.
 
 6. **Show in Desmos**  
    All the equations are sent to an HTML file that embeds Desmos. When you open the page, Desmos draws out the image using only math.
