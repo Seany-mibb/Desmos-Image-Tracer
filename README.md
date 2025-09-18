@@ -97,16 +97,14 @@ So, the limiting factor is not the image processing itself, but how much Desmos 
 Because rendering thousands of parametric equations in Desmos is demanding, here are some tips to get the best experience:
 
 1. Close Other Tabs or Apps
-Make sure to close other browser tabs, games, or software that use a lot of CPU or memory. Desmos needs as much processing power as possible to handle high-quality renders.
+   Make sure to close other browser tabs, games, or software that use a lot of CPU or memory. Desmos needs as much processing power as possible to handle high-quality renders.
 
-2. Be Patient with High Settings
+3. Be Patient with High Settings
+   Medium & High: you may get occasional “page unresponsive” warnings. Click Wait.
+   Super High: expect multiple warnings and longer loading times (1–2 minutes). This is normal.
 
-Medium & High: you may get occasional “page unresponsive” warnings. Click Wait.
-
-Super High: expect multiple warnings and longer loading times (1–2 minutes). This is normal.
-
-3. Start Small
-If you’re unsure, start with a low or medium quality setting first. Once you’re comfortable, try higher-quality settings.
+4. Start Small
+   If you’re unsure, start with a low or medium quality setting first. Once you’re comfortable, try higher-quality settings.
 
 ---
 
