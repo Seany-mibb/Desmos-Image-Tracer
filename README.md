@@ -77,11 +77,18 @@ A few important choices were made:
 
 ## Limitations
 
-The biggest limitation isn’t the code — it’s **Desmos itself**.  
+The biggest limitation isn’t the code — it’s Desmos itself.
 
-Desmos gets very slow when you load thousands of parametric equations. At higher quality settings, it takes a long time for the graph to finish drawing. Moving around or zooming also lags. This means the app works best on lower or medium settings, unless you have the patience to wait for everything to load.  
+Desmos gets very slow when you load thousands of parametric equations. At higher quality settings, the page may sometimes become unresponsive, and your browser may pop up a message asking whether to “Wait” or “Kill the page.”
+<img width="440" height="240" alt="Screenshot 2025-09-18 at 4 30 32 PM" src="https://github.com/user-attachments/assets/247a5a33-6132-4475-b795-b874ac47d7b8" />
 
-So, the limiting factor is not image processing but how much Desmos can handle.
+Medium & High settings may occasionally trigger a single “page unresponsive” warning, and you just need to click Wait.
+
+Super High settings are much heavier: the page may trigger multiple unresponsive warnings, and it can take 1–2 minutes for everything to finish loading. Patience is required if you want the full-detail result.
+
+Moving around or zooming while the graph is rendering also lags a lot. This means the app works best on lower or medium settings unless you don't mind waiting for the full high-quality version to load.
+
+So, the limiting factor is not the image processing itself, but how much Desmos can handle.
 
 ---
 
@@ -89,11 +96,8 @@ So, the limiting factor is not image processing but how much Desmos can handle.
 
 Some ideas for making this better:
 
-1. Export as a **Desmos JSON file** that can be imported directly.  
-2. Simplify equations so there are fewer, but still enough to look good.  
-3. Add a live **preview** of the edges before sending to Desmos.  
-4. Allow **multiple images** to be processed at once.  
-5. Add more customization for users (like curve smoothing).
+1. Simplify equations so there are fewer, but still enough to look good.  
+2. Add more customization for users (like curve smoothing or adjusting line thickness/color choices).
 
 ---
 
