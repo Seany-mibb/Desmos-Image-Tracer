@@ -16,7 +16,7 @@ OUTPUT_FOLDER = "output"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 
-def cleanup_old_files(folder, max_age_seconds=600):
+def cleanup_old_files(folder, max_age_seconds=300):
     import time
     import threading
     def cleaner():
@@ -97,11 +97,11 @@ def index():
 
         quality_level = int(request.form.get("quality", 3))
         quality_map = {
-            1: 6000,   # Super Low
-            2: 10000,   # Low
-            3: 17000,  # Medium
-            4: 25000,  # High
-            5: 35000,  # Super High
+            1: 3000,   # Super Low
+            2: 7000,   # Low
+            3: 13000,  # Medium
+            4: 20000,  # High
+            5: 30000,  # Super High
         }
 
         targ_num = quality_map.get(quality_level, 14000)
@@ -179,7 +179,12 @@ def index():
             <script src="https://www.desmos.com/api/v1.10/calculator.js?apiKey=dcb31709b452b1cf9dc26972add0fda6"></script>
         </head>
         <body>
-        <p><a href="/">Convert another image</a></p>
+            <p><a href="/">Convert another image</a></p>
+            <div id="loading" style="position: fixed; top: 0; left: 0; width: 100%; 
+                height: 100%; background: white; display: flex; justify-content: center; 
+                align-items: center; font-size: 24px; z-index: 1000;">
+                Rendering your image... grab a coffee or stretch a bit ☕
+            </div>
             <div id="calculator" style="width: 1600px; height: 1200px;"></div>
             <script type="text/javascript">
                 var elt = document.getElementById('calculator');
@@ -212,6 +217,10 @@ def index():
                         }}
                     calculator.setExpression({{ id: 'path' + i, latex: expressions[i], color: colorChoice}});
                 }}
+
+                setTimeout(() => {{
+                    document.getElementById('loading').style.display = 'none';
+                }}, 3000);
             </script>
         </body>
         </html>
