@@ -6,9 +6,12 @@
 
 ## Introduction
 
-This project is called **Desmos Image Tracer**. The goal is simple: take a picture that a user uploads and turn it into math equations that can be graphed in Desmos. Instead of seeing the image as pixels, you see it drawn out by lines and curves that are completely written as parametric equations.  
+This project is called **Desmos Image Tracer**. The goal is simple: take a picture that a user uploads and turn it into math equations that can be graphed in Desmos. Instead of seeing the image as pixels, you see it drawn out by lines and curves that are completely written as parametric equations.
 
 It’s a fun way to connect coding, math, and art. You upload one picture, and the app converts it into something Desmos can understand and draw.
+
+## Setup / Installation
+To get this project running in a Codespace (or Linux environment), follow these steps. First, update your packages with `sudo apt update`. Then install Potrace, which is used to convert edges to SVG, using `sudo apt install potrace`. Next, install the Python dependencies from `requirements.txt` in the same directory with `pip install -r requirements.txt`. If you are using Python 3 and `pip` doesn’t work, try `pip3 install -r requirements.txt`. Finally, run the Flask app with `python app.py` and open the link provided in the terminal (usually `http://127.0.0.1:5000`) to access the web interface.
 
 ---
 
@@ -16,20 +19,20 @@ It’s a fun way to connect coding, math, and art. You upload one picture, and t
 
 Here’s the step-by-step process:
 
-1. **Upload**  
+1. **Upload**
    You upload one image from the web interface. The program saves it in the `uploads/` folder.
 
-2. **Convert to Edges**  
+2. **Convert to Edges**
    The picture is changed to black and white, then edges are found using OpenCV’s **Canny edge detector**.
 
-3. **Vectorize with Potrace**  
+3. **Vectorize with Potrace**
    The edges are saved as a `.pbm` file and passed into **Potrace**, which converts the raster edges into an **SVG** (a vector image).
 
-4. **Parse the SVG**  
+4. **Parse the SVG**
    The SVG file contains paths with coordinates. These paths are read and broken down into commands like lines and curves.
 
 5. **Turn into Equations**
-   
+
    Each SVG path is converted into parametric equations, which are equations that describe both the x and y coordinates as functions of a   parameter t (usually between 0 and 1). This is what allows Desmos to draw the paths smoothly.
 
    Lines:
@@ -38,22 +41,22 @@ Here’s the step-by-step process:
    `x(t) = (1 - t) * x0 + t * x1`
    `y(t) = (1 - t) * y0 + t * y1`
 
-   
+
    As t goes from 0 to 1, the point `(x(t), y(t))` moves smoothly from the starting coordinate to the ending coordinate, following the actual coordinate values of the image. This is still called `linear interpolation`, but the range of x and y depends on the original SVG or image dimensions.
-   
+
    Curves (Cubic Bézier):
    Curves are more complex. A cubic Bézier curve is defined by four points: the starting point (x0, y0), two control points (x1, y1) and (x2, y2), and the ending point (x3, y3). The parametric equations are:
-   
+
    `x(t) = (1-t)^3*x0 + 3*(1-t)^2*t*x1 + 3*(1-t)*t^2*x2 + t^3*x3`
    `y(t) = (1-t)^3*y0 + 3*(1-t)^2*t*y1 + 3*(1-t)*t^2*y2 + t^3*y3`
-   
-   
+
+
    These equations smoothly blend the influence of all four points as t moves from 0 to 1, creating the curve shape. This is the same math used in graphic design and animation to make smooth vector curves.
-   
+
    Why Parametric Equations:
    Parametric equations are ideal for this project because they let us describe both x and y positions independently as functions of a single parameter t. This is perfect for tracing SVG paths, which can include lines, loops, and curves that aren’t simple functions of x or y.
 
-7. **Show in Desmos**  
+7. **Show in Desmos**
    All the equations are sent to an HTML file that embeds Desmos. When you open the page, Desmos draws out the image using only math.
 
 ---
@@ -62,15 +65,15 @@ Here’s the step-by-step process:
 
 There are really just two main files:
 
-- **`app.py`**  
-  This is the Flask server. It handles:  
-  - Uploading the image.  
-  - Running the pipeline (edges → Potrace → SVG → equations).  
-  - Choosing the quality level.  
-  - Choosing colors.  
-  - Cleaning up old files so the server doesn’t fill up.  
+- **`app.py`**
+  This is the Flask server. It handles:
+  - Uploading the image.
+  - Running the pipeline (edges → Potrace → SVG → equations).
+  - Choosing the quality level.
+  - Choosing colors.
+  - Cleaning up old files so the server doesn’t fill up.
 
-- **`templates/index.html`**  
+- **`templates/index.html`**
   This is the simple web page where you upload your image and pick settings.
 
 The program also creates temporary files like `.pbm` and `.svg` in the `output/` folder. These are just steps in the process.
@@ -81,13 +84,13 @@ The program also creates temporary files like `.pbm` and `.svg` in the `output/`
 
 A few important choices were made:
 
-- **Quality Levels**  
+- **Quality Levels**
   Users can pick from “Super Low” to “Super High.” Low settings are fast but less detailed. High settings have way more curves (20k–35k+ equations), which look better but take longer to render.
 
-- **File Cleanup**  
+- **File Cleanup**
   To stop the server from getting cluttered, a background thread deletes old files every 10 minutes.
 
-- **Color Options**  
+- **Color Options**
   You can choose a color or let the program pick random colors. Desmos only supports certain named colors, so the choices are limited.
 
 ---
@@ -129,13 +132,13 @@ Because rendering thousands of parametric equations in Desmos is demanding, here
 
 Some ideas for making this better:
 
-1. Simplify equations so there are fewer, but still enough to look good.  
+1. Simplify equations so there are fewer, but still enough to look good.
 2. Add more customization for users (like curve smoothing or adjusting line thickness/color choices).
 
 ---
 
 ## Conclusion
 
-Desmos Image Tracer is a simple but creative project. It takes one uploaded picture and transforms it into math art drawn by Desmos. Even though the rendering speed is limited by Desmos, the project shows how you can combine tools like OpenCV, Potrace, and a little math to create something unique.  
+Desmos Image Tracer is a simple but creative project. It takes one uploaded picture and transforms it into math art drawn by Desmos. Even though the rendering speed is limited by Desmos, the project shows how you can combine tools like OpenCV, Potrace, and a little math to create something unique.
 
 It’s mainly built around two files (`app.py` and `index.html`), but together they handle the full process from upload to final graph.
