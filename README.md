@@ -1,6 +1,6 @@
 # Desmos Image Tracer
 
-#### 🎥 Demo: <URL HERE>
+#### 🎥 Demo: https://www.youtube.com/watch?v=iadU-1Adh6s
 
 ---
 
